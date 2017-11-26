@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Clockwork Nixie</title>
+
+    <!--[if IE]><link rel="shortcut icon" href="images/favicon.ico"><![endif]-->
+    <link rel=icon href="images/favicon.ico" sizes="32x32" type="image/vnd.microsoft.icon">
+
+    <link rel="stylesheet" type="text/css" href="https://api.tracker.co.uk:2006/content/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://api.tracker.co.uk:2006/content/fonts/roboto/style.css">
+    <link rel="stylesheet" type="text/css" href="https://api.tracker.co.uk:2006/content/css/touch-app.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+	
+	  <script type="text/javascript">
+      firebase.initializeApp({
+        apiKey: "AIzaSyByTqmnaw15b6_jXiLjMoRIA61Bax41t2E",
+        authDomain: "clockwork-nixie.firebaseapp.com",
+        databaseURL: "https://clockwork-nixie.firebaseio.com",
+        projectId: "clockwork-nixie",
+        messagingSenderId: "49985618016"
+      });
+  	</script>
+
+    <style>
+      .cool { transition: width 0.7s, background-color 2s; }
+      .target { background-color: green; width: 50px; }
+      .target:hover { background-color: red; width: 100px; }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <header id="header">
+        <div class="container">
+          <h1>Clockwork Nixie | Registration</h1>
+        </div>
+      </header>
+      <div id="content">
+        <div class="container">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <section id="authenticate" class="hidden">
+                <div id="firebaseui-auth-container"></div>
+              </section>
+              <section id="connect" class="hidden">
+                <p>Hello <span id="displayName" /></p>
+                <p>
+                  Please choose a vehicle to connect to Alexa:
+                  <ul>
+                    <li>Dummy 1</li>
+                    <li>Dummy 2</li>
+                    <li><button class="target cool">Foo</button></li>
+                  </ul>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scene">
+      <div class="scene-foreground"></div>
+      <div class="scene-planet"></div>
+      <div class="scene-planet"></div>
+      <div class="scene-planet"></div>
+      <div class="scene-light"></div>
+      <div class="scene-light"></div>
+    </div>
+    <script src="https://api.tracker.co.uk:2006/content/js/touch-app.js"></script>
+    
+    <div id="sign-in-status"></div>
+    <div id="account-details"></div>
+    
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+
+    <script type="text/javascript">
+      window.addEventListener('load', function() {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            document.querySelector('#displayName').textContent = user.displayName
+            document.querySelector('#authenticate').classList.add("hidden")
+            document.querySelector('#connect').classList.remove("hidden")
+            // Connect using: user.uid;
+          } else {
+            document.querySelector('#authenticate').classList.remove("hidden")
+            document.querySelector('#connect').classList.add("hidden")
+          }
+        }, function(error) {
+          console.log(error)
+        });
+      });
+
+      (new firebaseui.auth.AuthUI(firebase.auth())).start('#firebaseui-auth-container', {
+        signInSuccessUrl: [location.protocol, '//', location.host, location.pathname].join(''),
+        signInOptions: [
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ], tosUrl: 'terms-of-service.html'
+      });
+    </script>
+  </body>
+</html>

@@ -1,25 +1,24 @@
 'use strict';
 
-(function () {
-  const express = require('express');
-  const application = express();
+const fs = require('fs');
+
+const HTTPS_CERTIFICATE = "/etc/letsencrypt/live/lucretia.org.uk"
+
+const api = require('./src/api');
+const webserver = require('./src/webserver');
+const application = new webserver({ isDebug: true });
 
 
-  application.use(express.static('public'));
+application.configure(api);
+application.serve('public');
+application.use((request, response) => response.sendStatus(404));
 
 
-  application.get('/api/test', function (request, response) {
-  	response.send(JSON.stringify({ foo: 'bar' }));
-  });
+if (fs.existsSync(HTTPS_CERTIFICATE)) {
+    application.listen({ certificate: HTTPS_CERTIFICATE });
+} else {
+    console.log("APPLICATION: no certificate - skipping HTTPS");
+}
+application.listen();
 
-
-  application.use(function (request, response) {
-      response.sendStatus(404);
-  });
-
-
-  application.listen(
-    process.env.NODE_PORT || 3000,
-    function () { console.log(`START: started worker ${process.pid}.`);
-  });
-})();
+console.log(`APPLICATION: started worker ${process.pid}.`);

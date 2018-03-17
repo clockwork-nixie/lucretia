@@ -14,8 +14,9 @@ class Webserver {
         this.isSsl = false;
         
         if (isDebug) {
+            console.log("WEBSERVER: debug log enabled")
             this.application.use(morgan(function (tokens, request, response) {
-                console.log(`${request.method} ${request.path}`)
+                console.log(`WEBSERVER: ${request.method} ${request.path}`)
             }));
         }
 

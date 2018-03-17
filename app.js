@@ -1,24 +1,40 @@
 'use strict';
 
+const Api = require('./src/api');
+const Cache = require('./src/cache')
+const DataStore = require("./src/datastore")
 const fs = require('fs');
+const nconf = require('nconf').argv().file({ file: 'configuration.json' });
+const Webserver = require('./src/webserver');
 
-const HTTPS_CERTIFICATE = "/etc/letsencrypt/live/lucretia.org.uk"
+const configuration = {
+    isSystest: nconf.get('systest') === "true",
+    webserver: {
+        certificate: nconf.get('certificate'),
+        port: nconf.get('port'),
+        sslPort: nconf.get('sslPort')
+    }
+};
 
-const api = require('./src/api');
-const webserver = require('./src/webserver');
-const application = new webserver({ isDebug: true });
+const api = new Api(new DataStore(new Cache()));
+const application = new Webserver({ isDebug: configuration.isSystest });
 
 
-application.configure(api);
+application.configure(api.registerRoutes);
 application.serve('public');
 application.use((request, response) => response.sendStatus(404));
 
 
-if (fs.existsSync(HTTPS_CERTIFICATE)) {
-    application.listen({ certificate: HTTPS_CERTIFICATE });
-} else {
-    console.log("APPLICATION: no certificate - skipping HTTPS");
+if (configuration.webserver.certificate) {
+    if (fs.existsSync(configuration.webserver.certificate)) {
+        application.listen({
+            certificate: configuration.webserver.certificate,
+            port: configuration.webserver.sslPort
+        });
+    } else {
+        console.log("WARNING: HTTPS certificate missing - running as HTTP only.")
+    }
 }
-application.listen();
+application.listen({ port: configuration.webserver.port });
 
 console.log(`APPLICATION: started worker ${process.pid}.`);

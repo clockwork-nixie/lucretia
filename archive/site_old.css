@@ -1,0 +1,326 @@
+html {
+	font-size: 62.5%;
+	min-width: 320px;
+}
+body {
+	font-family: "Roboto";
+	font-size: 1.4rem;
+	line-height: 2rem;
+	color: #c0c3c6;
+	background: #231926;
+	background: #22162a;
+	background: #081426;
+}
+html, body {
+	min-height: 100%;
+	height: 100%;
+	position: relative;
+}
+input {
+    text-transform: uppercase;
+}
+
+
+.hidden {
+	display: none;
+}
+
+
+
+/*	****************************************	//
+		Common
+//	****************************************	*/
+.container {
+	padding-left: 16px;
+	padding-right: 16px;
+	width: auto;
+	min-width: 0;
+	max-width: 600px;
+}
+
+@media (max-width: 767px) {
+	.container {
+		padding-left: 32px;
+		padding-right: 32px;
+		width: auto;
+		max-width: 400px;
+		z-index: 2;
+		position: relative;
+	}
+}
+
+#root {
+	min-height: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+#header {
+	height: 80px;
+	background: rgba(25, 22, 41, 0.5);
+	box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.5);
+	text-align: center;
+}
+#header h1 {
+	font-size: 2.4rem;
+	line-height: 8rem;
+	padding: 0;
+	margin: 0 auto;
+	color: #fff;
+	/*color: transparent;
+	background: url(../img/logo.png) no-repeat center;
+	background-size: 100%;*/
+}
+
+#content {
+	padding-top: 120px;
+}
+
+
+/*	****************************************	//
+		Scene
+//	****************************************	*/
+.scene {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.scene-foreground {
+	background: url(../img/foreground.png) no-repeat center center;
+	position: absolute;
+	top: -200px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.scene-light {
+	width: 350px;
+	height: 350px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin-left: -325px;
+	background: url(../img/light.png) no-repeat center;
+}
+.scene-light:nth-child(6) {
+	background-image: url(../img/light-2.png);
+	width: 560px;
+	height: 560px;
+	margin-left: -380px;
+}
+.scene-planet {
+	background: url(../img/planet-1.png) no-repeat center center;
+	width: 60px;
+	height: 60px;
+	position: absolute;
+}
+.scene-planet:nth-child(2) {
+	top: 150px;
+	left: 10%;
+	opacity: 0.5;
+}
+.scene-planet:nth-child(3) {
+	background-image: url(../img/planet-2.png);
+	top: 130px;
+	left: 50%;
+	margin-left: -45px;
+	opacity: 0.75;
+	z-index: 1;
+}
+.scene-planet:nth-child(4) {
+	background-image: url(../img/planet-3.png);
+	top: 175px;
+	right: 12%;
+	z-index: 1;
+}
+
+/*	****************************************	//
+		Form
+//	****************************************	*/
+.form-group label {
+	margin-bottom: 16px;
+	height: 24px;
+	line-height: 2.4rem;
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #665369;
+	text-transform: uppercase;
+	font-family: "Roboto";
+}
+.form-group label > strong {
+	color: #dd2244;
+	line-height: 2.4rem;
+	display: inline-block;
+	vertical-align: middle;
+	width: 24px;
+	height: 24px;
+	text-align: center;
+	vertical-align: top;
+	font-size: 1.6rem;
+}
+.form-group .btn {
+	margin-bottom: 0;
+}
+.form-control {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	height: 48px;
+	line-height: 3.2rem;
+	padding: 8px 16px;
+	color: #505356;
+	border-color: #434;
+	border-color: transparent;
+	background: rgba(3, 6, 25, 0.5);
+}
+.form-control:focus {
+	border-color: transparent;
+	outline: 0;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0,0,0,.075), 0 0 24px 0 rgba(136, 34, 119, 0.5);
+	box-shadow: inset 0 2px 4px rgba(0,0,0,.075), 0 0 24px 0 rgba(136, 34, 119, 0.5);
+}
+.form-control.has-success {
+	border-color: #0c9;
+}
+
+/*	****************************************	//
+		Panel
+//	****************************************	*/
+.panel-default {
+	/*background: rgba(31, 28, 47, 0.5);*/
+	background: #1f1c2f;
+	border-color: transparent;
+	box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.25);
+	border-radius: 2px;
+}
+.panel-default > .panel-body {
+	padding: 32px;
+}
+.panel-default .form-control {
+}
+
+/*	****************************************	//
+		Message
+//	****************************************	*/
+.message {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	line-height: 2rem;
+	font-size: 1.4rem;
+	padding: 16px;
+	margin-bottom: 16px;
+	color: #012;
+}
+.message.has-danger {
+	background: #b78;
+	color: #734;
+}
+.message.has-success {
+	background: #0c9;
+	color: #085;
+}
+
+
+/*	****************************************	//
+		Button
+//	****************************************	*/
+.btn {
+	line-height: 4rem;
+	font-size: 1.5rem;
+	border-color: transparent;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	margin-bottom: 16px;
+	padding: 3px 15px;
+	text-align: center;
+	-webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+.btn:focus,
+.btn:active:focus,
+.btn:hover {
+	background: none;
+	border-color: transparent;
+	outline: none;
+}
+
+.btn.disabled.focus,
+.btn.disabled:focus,
+.btn.disabled:hover,
+.btn[disabled].focus,
+.btn[disabled]:focus,
+.btn[disabled]:hover,
+fieldset[disabled] .btn.focus,
+fieldset[disabled] .btn:focus,
+fieldset[disabled] .btn:hover {
+	opacity: 0.5;
+}
+
+
+
+.btn-primary {
+	background: #d24;
+	color: #fff;
+}
+.btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary:hover,
+
+.btn-primary.disabled.focus,
+.btn-primary.disabled:focus,
+.btn-primary.disabled:hover,
+.btn-primary[disabled].focus,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary.focus,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary:hover {
+	color: #fff;
+	background: #c13;
+	border-color: transparent;
+}
+
+
+.btn-secondary {
+	background: #333649;
+	color: #fff;
+}
+.btn-secondary:focus,
+.btn-secondary:active:focus,
+.btn-secondary:hover,
+
+.btn-secondary.disabled.focus,
+.btn-secondary.disabled:focus,
+.btn-secondary.disabled:hover,
+.btn-secondary[disabled].focus,
+.btn-secondary[disabled]:focus,
+.btn-secondary[disabled]:hover,
+fieldset[disabled] .btn-secondary.focus,
+fieldset[disabled] .btn-secondary:focus,
+fieldset[disabled] .btn-secondary:hover {
+	color: #fff;
+	background: #222639;
+	border-color: transparent;
+}
+
+.btn-toolbar {
+	margin-left: -16px;
+}
+.btn-toolbar > .btn {
+	margin-left: 16px;
+}
+
+.btn-equalise,
+.btn-equalise.btn-toolbar {
+	display: table;
+}
+.btn-equalise > .btn {
+	display: table-cell;
+	width: 1%;
+}

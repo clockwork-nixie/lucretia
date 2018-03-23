@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Clockwork Nixie</title>
+    <title>Test Application</title>
 
     <!--[if IE]><link rel="shortcut icon" href="images/favicon.ico"><![endif]-->
     <link rel=icon href="images/favicon.ico" sizes="32x32" type="image/vnd.microsoft.icon">
-
-    <link rel="stylesheet" type="text/css" href="https://api.tracker.co.uk:2006/content/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://api.tracker.co.uk:2006/content/fonts/roboto/style.css">
-    <link rel="stylesheet" type="text/css" href="https://api.tracker.co.uk:2006/content/css/touch-app.css">
+    <link rel="stylesheet" type="text/css" href="css/site.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -28,16 +25,16 @@
   	</script>
 
     <style>
-      .cool { transition: width 0.7s, color 2s; }
-      .target { color: green; width: 50px; }
-      .target:hover {color: red; width: 100px; }
+      .cool { transition: color 0.5s; }
+      .target { color: green; }
+      .target:hover {color: red; }
     </style>
   </head>
   <body>
     <div id="root">
       <header id="header">
         <div class="container">
-          <h1>Clockwork Nixie | Registration</h1>
+          <h1>Test Application | Register</h1>
         </div>
       </header>
       <div id="content">
@@ -50,7 +47,7 @@
               <section id="connect" class="hidden">
                 <p>Hello <span id="displayName" /></p>
                 <p>
-                  Please choose a vehicle to connect to Alexa:
+                  Some preamble:
                   <ul>
                     <li id="uid"></li>
                     <li><a id="photo">Photo</a></li>
@@ -66,17 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="scene">
-      <div class="scene-foreground"></div>
-      <div class="scene-planet"></div>
-      <div class="scene-planet"></div>
-      <div class="scene-planet"></div>
-      <div class="scene-light"></div>
-      <div class="scene-light"></div>
-    </div>
-
-    <script src="https://api.tracker.co.uk:2006/content/js/touch-app.js"></script>
-    
+   
     <div id="sign-in-status"></div>
     <div id="account-details"></div>
     
@@ -84,7 +71,7 @@
 
     <script type="text/javascript">
       window.addEventListener('load', function() {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {

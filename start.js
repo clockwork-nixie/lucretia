@@ -40,5 +40,5 @@ if (cluster.isMaster) {
     });
 } else {
     // This is a worker process, so just run the application.
-    require('./app.js');
+    require('./server/application.js');
 }

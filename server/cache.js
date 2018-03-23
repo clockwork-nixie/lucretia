@@ -16,7 +16,7 @@ class Cache {
                         this.client = null;
                         client.quit();                    
                     }
-                })
+                });
             }
             return await callback(this.client);
         } catch (error) {

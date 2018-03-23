@@ -1,11 +1,11 @@
 'use strict';
 
-const Api = require('./src/api');
-const Cache = require('./src/cache')
-const DataStore = require("./src/datastore")
+const Api = require('./api');
+const Cache = require('./cache')
+const DataStore = require("./datastore")
 const fs = require('fs');
-const nconf = require('nconf').argv().file({ file: 'configuration.json' });
-const Webserver = require('./src/webserver');
+const nconf = require('nconf').argv().file({ file: 'server.config.json' });
+const Webserver = require('./webserver');
 
 const configuration = {
     isSystest: nconf.get('systest') === "true",

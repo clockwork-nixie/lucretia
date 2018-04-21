@@ -2,7 +2,11 @@ const path = require('path');
 const WebpackAutoInject = require('webpack-auto-inject-version');
 
 module.exports = {
-  entry: './client/application.js',
+  entry: {
+    console: ['babel-polyfill', './client/console.js'],
+    gui: ['babel-polyfill', './client/application.js'],
+
+  },
   module: {
     rules: [{ test: /\.js$/, include: /client/, loader: "babel-loader" }]
   },
@@ -11,7 +15,7 @@ module.exports = {
     componentsOptions: { AutoIncreaseVersion: { runInWatchMode: true } }
   }) ],
   output: {
-    filename: 'bundle.js',
+    filename: '[name]-bundle.js',
     path: path.resolve(__dirname, 'public/scripts')
   }
 };

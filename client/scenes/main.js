@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import IsometricScene from '../utilities/isometricScene'
 
@@ -14,14 +14,9 @@ class MainScene extends IsometricScene {
         this.buildMap('map', 'tiles');
         this.cameras.main.setSize(1600, 800);
 
-        this.input.on('pointermove', function (pointer) {
-            this.mouse.x = pointer.x;
-            this.mouse.y = pointer.y;
-        }, this);
-
-        this.input.on('pointerdown', function (pointer) {
+        this.input.on('pointerdown', function () {
             var hit = this.hitTile(this.mouse.x, this.mouse.y);
-
+            console.log(hit);
             if (hit) {
                 if (this.currentTile) {
                     this.currentTile.sprite.clearTint();
@@ -37,6 +32,11 @@ class MainScene extends IsometricScene {
                     this.currentTile = hit;
                 }
             }
+        }, this);
+
+        this.input.on('pointermove', function (pointer) {
+            this.mouse.x = pointer.x;
+            this.mouse.y = pointer.y;
         }, this);
     }
 

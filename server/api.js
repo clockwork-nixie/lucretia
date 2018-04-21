@@ -4,49 +4,60 @@
 class Api {
     constructor(datastore) {
         this.datastore = datastore;
-        this.registerRoutes = this.registerRoutes.bind(this)
+        this.registerRoutes = this.registerRoutes.bind(this);
     }
 
 
     registerApi(get, post) {
         const self = this;
-
-        get('/api/login', async (request, response) => {
-            const username = request.query.username;
-            const password = request.query.password;
-            const userId = await self.datastore.getUserId(username, password);
-            const sessionKey = userId? await self.datastore.createSession(userId): null;
-
-            if (sessionKey) {
-                response.send(JSON.stringify({ sessionKey: sessionKey }));
-            } else {
-                response.sendStatus(401);
-            }
-        }, { allowAnonymous: true });
-
-
-        get('/api/register', async (request, response) => {
-            const username = request.query.username;
-            const password = request.query.password;
-            const userId = await self.datastore.createUser(username, password);
-            let sessionKey = null;
+              
+        get('/api/test',
+            (request, response) => response.send(JSON.stringify({ foo: 'bar' })),
+            { allowAnonymous: true });
             
-            if (userId) {
-                sessionKey = await self.datastore.createSession(userId);
-            }
+        post('/api/v1/login', async (request, response) => {
+            const username = request.body? request.body.username: null;
+            const password = request.body? request.body.password: null;
 
-            if (sessionKey) {
-                response.send(JSON.stringify({ sessionKey: sessionKey }));
+            console.log(request.body);
+
+            if (!username || !password) {
+                response.sendStatus(400);
             } else {
-                response.sendStatus(409);
+                const userId = await self.datastore.getUserId(username, password);
+                const sessionKey = userId? await self.datastore.createSession(userId): null;
+
+                if (!sessionKey) {
+                    response.sendStatus(401);
+                } else {
+                    response.json({ sessionKey: sessionKey });
+                }
             }
         }, { allowAnonymous: true });
 
+        post('/api/v1/register', async (request, response) => {
+            const username = request.body? request.body.username: null;
+            const password = request.body? request.body.password: null;
 
-        get('/api/test', (request, response) =>
-            response.send(JSON.stringify({ foo: 'bar' })));
+            if (!username || !password) {
+                response.sendStatus(400);
+            } else {
+                const userId = await self.datastore.createUser(username, password);
+
+                if (!userId) {
+                    response.sendStatus(409);
+                } else {
+                    const sessionKey = await self.datastore.createSession(userId);
+
+                    if (!sessionKey) {
+                        response.sendStatus(401);
+                    } else {
+                        response.send(JSON.stringify({ sessionKey: sessionKey }));
+                    }
+                }
+            }
+        }, { allowAnonymous: true });
     }
-
 
     registerRoutes(application) {
         const self = this;

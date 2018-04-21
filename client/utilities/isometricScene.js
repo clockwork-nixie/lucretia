@@ -1,3 +1,5 @@
+'use strict';
+
 class IsometricScene extends Phaser.Scene {
     constructor(configuration) {
         super(configuration);

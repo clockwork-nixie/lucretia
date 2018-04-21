@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Console Application</title>
+
+    <!--[if IE]><link rel="shortcut icon" href="images/favicon.ico"><![endif]-->
+    <link rel=icon href="images/favicon.ico" sizes="32x32" type="image/vnd.microsoft.icon">
+    <link href="//fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/console.css">
+  </head>
+  
+  <body>
+    <div id="root">
+      <header class="page-header hide-if-logged-out">
+        <nav>
+          <ul>
+            <li><a class="logout button" href="#">Logout</a></li>
+          </ul>
+        </nav>    
+      </header>
+
+      <main>
+        <section id="login-panel" class="hide-if-logged-in">
+          <div class="container">
+              <div class="page-title">Console Login</div>
+          </div>
+
+          <form>
+            <div class="form-line">
+              <label for="loginUsername">Email:</label>
+              <input id="loginUsername" type="email" placeholder="Enter email" />
+            </div>
+            <div class="form-line">
+              <label for="loginPassword">Password:</label>
+              <input id="loginPassword" type="password" placeholder="Enter password" />
+            </div>
+            <div class="button-bar">
+              <input id="remember-me" type="checkbox" checked="checked">
+              <label for="remember-me">Remember&nbsp;me</label>
+            </div>
+            <div class="button-bar">
+              <a class="button login" href="#">Login</a>
+            </div>
+          </form>
+
+          <aside class="cookie-disclaimer">
+            This site only uses cookies to remember your username for login,
+            and to record whether you&apos;ve seen this message.
+          </aside>
+        </section>
+    
+        <section id="main-panel" class="hide-if-logged-out">
+          Logged In
+        </section>    
+      </main>
+    </div>
+
+    <div class="overlay"></div>
+    
+    <script type="text/javascript" src="scripts/console-bundle.js"></script>
+  </body>
+</html>

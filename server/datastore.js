@@ -12,7 +12,7 @@ class DataStore {
     async createSession(userId) {
         const sessionId = uuid();
 
-        return await this.cache.hset('session', userId, sessionId)? userId + '|' + sessionId: null;
+        return (await this.cache.hset('session', userId, sessionId))? userId + '|' + sessionId: null;
     }
 
 

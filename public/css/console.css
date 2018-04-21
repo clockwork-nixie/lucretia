@@ -1,0 +1,119 @@
+html {
+	font-size: 62.5%;
+	min-width: 320px;
+}
+body {
+	font-family: 'Gugi', cursive;
+	font-size: 1.4rem;
+	line-height: 2rem;
+	color: #c0c3c6;
+	background: aliceblue;
+}
+html, body {
+	height: 100%;
+	margin: 0;
+	min-height: 100%;
+	position: relative;
+	padding: 0;
+	top: 0;
+}
+
+
+.clearfix::after {
+	clear: both;
+	content: "";
+	display: table;
+	line-height: 0;
+}
+.hidden {
+	display: none;
+}
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    cursor: pointer;
+}
+.page-header nav ul {
+	float: right;
+	padding: 0 10px 0 10px;
+}
+.page-header nav ul li {
+	display: inline;
+	list-style: none;
+	padding: 0 3px 0 3px;
+}
+
+
+a.button {
+	background-color: #C0C0C0;
+	border-radius: 4px;
+	color: black;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 12px;
+	padding-right: 12px;
+	text-decoration: none;
+}
+form .button-bar {
+	margin: 24px 0 0 0;
+	padding: 0;
+	text-align: center;
+}
+
+
+#root.logged-in .hide-if-logged-in {
+	display: none;
+}
+#root:not(.logged-in) .hide-if-logged-out {
+	display: none;
+}
+
+
+#login-panel {
+	margin: auto;
+	height: 100%;
+	max-width: 300px;
+	min-width: 250px;
+	padding: 10% 0 0 0;
+}
+#login-panel .page-title {
+	font-size: x-large;
+	padding: 20px 0 20px 0;
+	text-align: center;
+	width: 100%;
+}
+#login-panel .form-line {
+	margin: 5px 0 5px 0;
+}
+#login-panel form label {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	width: 30%;
+}
+#login-panel form input[type=email],input[type=password] {
+	display: inline-block;
+	border-radius: 4px;
+	margin: 0;
+	padding: 3px 10px 3px 10px;
+	width: 60%;
+}
+#login-panel .cookie-disclaimer {
+	color: #707070;
+	margin: 40px 0 0 0;
+	text-align: center;
+}
+
+#main-panel {
+	clear: both;
+}

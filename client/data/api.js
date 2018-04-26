@@ -10,7 +10,7 @@ function handleErrors(path, response, ignoreCodes, statusField) {
     if (!response || !response.status) {
         throw Error(`Reponse from ${path} was null.`)
     } else if (response.ok || (ignoreCodes && ignoreCodes.indexOf(response.status) >= 0)) {
-        let body = response.body || {};
+        let body = (response.body? response.json(): null) || {};
 
         if (statusField) {
             body = {

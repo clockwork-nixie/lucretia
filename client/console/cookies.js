@@ -25,10 +25,15 @@ export default {
     },
 
 
-    set: (name, value) => {
+    setForever: (name, value) => {
         // There is no "forever" for cookies, so set expiry way in the future.
         const expires = "expires="+ new Date(2037,1,1).toUTCString();
             
-        document.cookie = name + "=" + encodeURIComponent(value) + ";" + expires + ";path=/";
+        document.cookie = `${name}=${encodeURIComponent(value)};${expires};path=/`;
+    },
+
+
+    setUntilBrowserClose: (name, value) => {
+        document.cookie = `${name}=${encodeURIComponent(value)};path=/`;
     }
 };

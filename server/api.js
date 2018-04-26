@@ -12,25 +12,28 @@ class Api {
         const self = this;
               
         get('/api/test',
-            (request, response) => response.send(JSON.stringify({ foo: 'bar' })),
+            (request, response) => response.json({ foo: 'bar' }),
             { allowAnonymous: true });
             
         post('/api/v1/login', async (request, response) => {
             const username = request.body? request.body.username: null;
             const password = request.body? request.body.password: null;
 
-            console.log(request.body);
-
             if (!username || !password) {
                 response.sendStatus(400);
             } else {
                 const userId = await self.datastore.getUserId(username, password);
-                const sessionKey = userId? await self.datastore.createSession(userId): null;
 
-                if (!sessionKey) {
+                if (!userId) {
                     response.sendStatus(401);
                 } else {
-                    response.json({ sessionKey: sessionKey });
+                    const sessionKey = await self.datastore.createSession(userId);
+
+                    if (!sessionKey) {
+                        response.sendStatus(500);
+                    } else {
+                        response.json({ sessionKey });
+                    }
                 }
             }
         }, { allowAnonymous: true });
@@ -52,12 +55,13 @@ class Api {
                     if (!sessionKey) {
                         response.sendStatus(401);
                     } else {
-                        response.send(JSON.stringify({ sessionKey: sessionKey }));
+                        response.json({ sessionKey: sessionKey });
                     }
                 }
             }
         }, { allowAnonymous: true });
     }
+
 
     registerRoutes(application) {
         const self = this;
@@ -76,10 +80,9 @@ class Api {
                             return;
                         }
                     }
-                    await action(request, response, user);
+                    return await action(request, response, user);
                 } catch (error) {
                     console.log(`API(${route}): ${error}`);
-                    console.log(error);
                     response.sendStatus(500);
                 }    
             });

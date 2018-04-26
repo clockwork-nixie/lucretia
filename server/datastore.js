@@ -12,7 +12,9 @@ class DataStore {
     async createSession(userId) {
         const sessionId = uuid();
 
-        return (await this.cache.hset('session', userId, sessionId))? userId + '|' + sessionId: null;
+        await this.cache.hset('session', userId, sessionId);
+        
+        return `${userId}|${sessionId}`;
     }
 
 
@@ -22,7 +24,7 @@ class DataStore {
         if (username && password) {
             const userId = uuid();
 
-            if (await this.cache.hsetnx('login', username, userId + '|' + password)) {
+            if (await this.cache.hsetnx('login', username, `${userId}|${password}`)) {
                 if (await this.cache.hsetnx('user', userId, JSON.stringify({}))) {
                     result = userId;
                 }

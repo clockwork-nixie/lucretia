@@ -22,7 +22,7 @@ const application = new Webserver({ isDebug: configuration.isSystest });
 
 application.configure(api.registerRoutes);
 application.serve('public');
-application.alias('console', 'public/console.html');
+application.alias('', 'public/login.html');
 application.use((request, response) => response.sendStatus(404));
 
 

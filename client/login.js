@@ -1,7 +1,7 @@
 "use strict";
 
 import Api from './data/api';
-import Ui from './console/ui';
+import Ui from './login/ui';
 
 console.log(
     '%c Clockwork Nixie v[AIV]{version}[/AIV] %c https://github.com/clockwork-nixie',

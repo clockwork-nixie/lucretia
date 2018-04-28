@@ -3,8 +3,8 @@ const WebpackAutoInject = require('webpack-auto-inject-version');
 
 module.exports = {
   entry: {
-    console: ['babel-polyfill', './client/console.js'],
-    gui: ['babel-polyfill', './client/application.js'],
+    login: ['babel-polyfill', './client/login.js'],
+    legacy: ['babel-polyfill', './client/legacy.js'],
 
   },
   module: {
